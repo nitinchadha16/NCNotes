@@ -1,0 +1,314 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B2B037891E20D5EE00B848FF /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B037881E20D5EE00B848FF /* AppDelegate.swift */; };
+		B2B0378E1E20D5EE00B848FF /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2B0378C1E20D5EE00B848FF /* Main.storyboard */; };
+		B2B037901E20D5EE00B848FF /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B2B0378F1E20D5EE00B848FF /* Assets.xcassets */; };
+		B2B037931E20D5EE00B848FF /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = B2B037911E20D5EE00B848FF /* LaunchScreen.storyboard */; };
+		B2B0379D1E20D63E00B848FF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B0379A1E20D63E00B848FF /* BaseViewController.swift */; };
+		B2B0379E1E20D63E00B848FF /* DetailedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B0379B1E20D63E00B848FF /* DetailedViewController.swift */; };
+		B2B0379F1E20D63E00B848FF /* MasterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B0379C1E20D63E00B848FF /* MasterTableViewController.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B2B037851E20D5EE00B848FF /* NCNotepad.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = NCNotepad.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B2B037881E20D5EE00B848FF /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		B2B0378D1E20D5EE00B848FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
+		B2B0378F1E20D5EE00B848FF /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B2B037921E20D5EE00B848FF /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		B2B037941E20D5EE00B848FF /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B2B0379A1E20D63E00B848FF /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
+		B2B0379B1E20D63E00B848FF /* DetailedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedViewController.swift; sourceTree = "<group>"; };
+		B2B0379C1E20D63E00B848FF /* MasterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterTableViewController.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B2B037821E20D5EE00B848FF /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B2B0377C1E20D5ED00B848FF = {
+			isa = PBXGroup;
+			children = (
+				B2B037871E20D5EE00B848FF /* NCNotepad */,
+				B2B037861E20D5EE00B848FF /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		B2B037861E20D5EE00B848FF /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B2B037851E20D5EE00B848FF /* NCNotepad.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		B2B037871E20D5EE00B848FF /* NCNotepad */ = {
+			isa = PBXGroup;
+			children = (
+				B2B037881E20D5EE00B848FF /* AppDelegate.swift */,
+				B2B0379A1E20D63E00B848FF /* BaseViewController.swift */,
+				B2B0379C1E20D63E00B848FF /* MasterTableViewController.swift */,
+				B2B0379B1E20D63E00B848FF /* DetailedViewController.swift */,
+				B2B0378C1E20D5EE00B848FF /* Main.storyboard */,
+				B2B0378F1E20D5EE00B848FF /* Assets.xcassets */,
+				B2B037911E20D5EE00B848FF /* LaunchScreen.storyboard */,
+				B2B037941E20D5EE00B848FF /* Info.plist */,
+			);
+			path = NCNotepad;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B2B037841E20D5EE00B848FF /* NCNotepad */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B2B037971E20D5EE00B848FF /* Build configuration list for PBXNativeTarget "NCNotepad" */;
+			buildPhases = (
+				B2B037811E20D5EE00B848FF /* Sources */,
+				B2B037821E20D5EE00B848FF /* Frameworks */,
+				B2B037831E20D5EE00B848FF /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = NCNotepad;
+			productName = NCNotepad;
+			productReference = B2B037851E20D5EE00B848FF /* NCNotepad.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B2B0377D1E20D5ED00B848FF /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0800;
+				LastUpgradeCheck = 0800;
+				ORGANIZATIONNAME = "Nitin Chadha";
+				TargetAttributes = {
+					B2B037841E20D5EE00B848FF = {
+						CreatedOnToolsVersion = 8.0;
+						ProvisioningStyle = Automatic;
+					};
+				};
+			};
+			buildConfigurationList = B2B037801E20D5ED00B848FF /* Build configuration list for PBXProject "NCNotepad" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B2B0377C1E20D5ED00B848FF;
+			productRefGroup = B2B037861E20D5EE00B848FF /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B2B037841E20D5EE00B848FF /* NCNotepad */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B2B037831E20D5EE00B848FF /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2B037931E20D5EE00B848FF /* LaunchScreen.storyboard in Resources */,
+				B2B037901E20D5EE00B848FF /* Assets.xcassets in Resources */,
+				B2B0378E1E20D5EE00B848FF /* Main.storyboard in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B2B037811E20D5EE00B848FF /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B2B037891E20D5EE00B848FF /* AppDelegate.swift in Sources */,
+				B2B0379F1E20D63E00B848FF /* MasterTableViewController.swift in Sources */,
+				B2B0379D1E20D63E00B848FF /* BaseViewController.swift in Sources */,
+				B2B0379E1E20D63E00B848FF /* DetailedViewController.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		B2B0378C1E20D5EE00B848FF /* Main.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2B0378D1E20D5EE00B848FF /* Base */,
+			);
+			name = Main.storyboard;
+			sourceTree = "<group>";
+		};
+		B2B037911E20D5EE00B848FF /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				B2B037921E20D5EE00B848FF /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		B2B037951E20D5EE00B848FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B2B037961E20D5EE00B848FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVES = YES;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B2B037981E20D5EE00B848FF /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NCNotepad/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nitinchadha.NCNotepad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Debug;
+		};
+		B2B037991E20D5EE00B848FF /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = NCNotepad/Info.plist;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = com.nitinchadha.NCNotepad;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B2B037801E20D5ED00B848FF /* Build configuration list for PBXProject "NCNotepad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2B037951E20D5EE00B848FF /* Debug */,
+				B2B037961E20D5EE00B848FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B2B037971E20D5EE00B848FF /* Build configuration list for PBXNativeTarget "NCNotepad" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B2B037981E20D5EE00B848FF /* Debug */,
+				B2B037991E20D5EE00B848FF /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B2B0377D1E20D5ED00B848FF /* Project object */;
+}

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AMj-Og-DqD">
+    <dependencies>
+        <deployment identifier="iOS"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <scenes>
+        <!--Detailed View Controller-->
+        <scene sceneID="Eua-xy-wfY">
+            <objects>
+                <viewController id="Doc-ah-mUk" customClass="DetailedViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aod-b2-qK7"/>
+                        <viewControllerLayoutGuide type="bottom" id="3sU-Ps-tqP"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="pM6-xF-Poi">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3X-Ur-GzN">
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="O3X-Ur-GzN" firstAttribute="centerY" secondItem="pM6-xF-Poi" secondAttribute="centerY" id="dn7-LO-qvZ"/>
+                            <constraint firstItem="O3X-Ur-GzN" firstAttribute="centerX" secondItem="pM6-xF-Poi" secondAttribute="centerX" id="oSd-AQ-yAn"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" id="lvD-gz-5NE"/>
+                    <connections>
+                        <outlet property="fruitNameLabel" destination="O3X-Ur-GzN" id="EKZ-aC-C8E"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="URa-m0-JF2" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="831.20000000000005" y="7.6461769115442282"/>
+        </scene>
+        <!--Root View Controller-->
+        <scene sceneID="cid-ha-axI">
+            <objects>
+                <tableViewController clearsSelectionOnViewWillAppear="NO" id="W5J-9H-Hh8" customClass="MasterTableViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ybm-uO-eG2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <connections>
+                            <outlet property="dataSource" destination="W5J-9H-Hh8" id="GUH-iZ-bpj"/>
+                            <outlet property="delegate" destination="W5J-9H-Hh8" id="wF5-wT-a9v"/>
+                        </connections>
+                    </tableView>
+                    <navigationItem key="navigationItem" title="Root View Controller" id="qEV-j6-mgs"/>
+                </tableViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EdI-tt-9ku" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="844" y="-694"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="T7d-pv-yPb">
+            <objects>
+                <navigationController id="9Pb-qY-rWZ" sceneMemberID="viewController">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="The-VJ-UzA">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <connections>
+                        <segue destination="W5J-9H-Hh8" kind="relationship" relationship="rootViewController" id="BVS-nq-ozN"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="rEf-Mb-LtK" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-107" y="-694"/>
+        </scene>
+        <!--Base View Controller-->
+        <scene sceneID="pWJ-Id-Lvj">
+            <objects>
+                <splitViewController id="AMj-Og-DqD" customClass="BaseViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
+                    <connections>
+                        <segue destination="9Pb-qY-rWZ" kind="relationship" relationship="masterViewController" id="3fA-iJ-N2N"/>
+                        <segue destination="84C-Co-a5D" kind="relationship" relationship="detailViewController" id="gDp-X6-zUa"/>
+                    </connections>
+                </splitViewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="jD7-Y9-436" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1058" y="-366"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="gBB-k6-GVS">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="84C-Co-a5D" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="beY-do-6i5">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="Doc-ah-mUk" kind="relationship" relationship="rootViewController" id="kwa-JO-Bzc"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Hb9-UH-xxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-108" y="7.6461769115442282"/>
+        </scene>
+    </scenes>
+</document>
