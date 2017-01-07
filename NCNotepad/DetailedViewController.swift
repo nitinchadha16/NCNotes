@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailedViewController: UIViewController {
+class DetailedViewController: BaseViewController {
 
     @IBOutlet weak var fruitNameLabel: UILabel!
     
@@ -25,8 +25,12 @@ class DetailedViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         registerForNotification()
-        initializeUserInterface()
-        setUpNavigationBarUserInterface()
+    }
+    
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        refreshUI()
+        
     }
     
     func registerForNotification(){
@@ -49,30 +53,10 @@ class DetailedViewController: UIViewController {
             self.textViewBottomConstraint.constant = 0
         })
     }
-
-    
-    
-    
-    func initializeUserInterface(){
-        self.view.backgroundColor = UIColor(colorLiteralRed: 0.976, green: 0.949, blue: 0.494, alpha: 1)
-    }
-    
-    override func viewWillAppear(_ animated: Bool) {
-        super.viewWillAppear(animated)
-        refreshUI()
-    }
-    
-    func setUpNavigationBarUserInterface(){
-        self.navigationController?.navigationBar.barTintColor = UIColor(red: 0.341, green: 0.247, blue: 0.212, alpha: 1)
-        self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
-        self.title = "Nitin Chadha"
-        self.navigationController?.navigationBar.isTranslucent = false
-        self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
-        self.navigationController?.navigationBar.tintColor = UIColor.white
-    }
     
     func refreshUI(){
         fruitNameLabel.text = fruitName
+        self.title = fruitName
     }
 }
 

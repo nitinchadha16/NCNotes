@@ -6,6 +6,49 @@
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Notes-->
+        <scene sceneID="e4T-Vl-gbf">
+            <objects>
+                <viewController id="wPk-VX-raG" customClass="MasterTableViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="HPb-jr-oT9"/>
+                        <viewControllerLayoutGuide type="bottom" id="JdP-S6-Wl6"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="sdy-eh-eT2">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dEL-qR-eqb">
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            </tableView>
+                            <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECO-xz-3n7">
+                                <color key="backgroundColor" red="0.89471340669999999" green="0.43732544600000001" blue="0.53224973369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="1" id="2Yi-VN-bj2"/>
+                                </constraints>
+                            </view>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstAttribute="trailing" secondItem="dEL-qR-eqb" secondAttribute="trailing" id="1sF-Jg-9U3"/>
+                            <constraint firstItem="dEL-qR-eqb" firstAttribute="top" secondItem="sdy-eh-eT2" secondAttribute="top" id="81G-sr-YTT"/>
+                            <constraint firstAttribute="bottom" secondItem="ECO-xz-3n7" secondAttribute="bottom" id="MB4-4c-cte"/>
+                            <constraint firstItem="ECO-xz-3n7" firstAttribute="top" secondItem="sdy-eh-eT2" secondAttribute="top" id="Tod-kw-TxQ"/>
+                            <constraint firstAttribute="trailing" secondItem="ECO-xz-3n7" secondAttribute="trailing" id="o5G-N5-5Xs"/>
+                            <constraint firstItem="JdP-S6-Wl6" firstAttribute="top" secondItem="dEL-qR-eqb" secondAttribute="bottom" id="oEe-ol-Dhz"/>
+                            <constraint firstItem="dEL-qR-eqb" firstAttribute="leading" secondItem="sdy-eh-eT2" secondAttribute="leading" id="vfL-zE-Ich"/>
+                        </constraints>
+                    </view>
+                    <navigationItem key="navigationItem" title="Notes" id="QNU-6I-hdd"/>
+                    <connections>
+                        <outlet property="notesList" destination="dEL-qR-eqb" id="Xn0-rG-QYu"/>
+                        <outlet property="separatorView" destination="ECO-xz-3n7" id="djT-bO-Jad"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="RJH-2F-mZH" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1496.8" y="-678.71064467766121"/>
+        </scene>
         <!--Detailed View Controller-->
         <scene sceneID="Eua-xy-wfY">
             <objects>
@@ -49,48 +92,13 @@
             </objects>
             <point key="canvasLocation" x="831.20000000000005" y="7.6461769115442282"/>
         </scene>
-        <!--Notes-->
-        <scene sceneID="cid-ha-axI">
-            <objects>
-                <tableViewController clearsSelectionOnViewWillAppear="NO" id="W5J-9H-Hh8" customClass="MasterTableViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" id="Ybm-uO-eG2">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <connections>
-                            <outlet property="dataSource" destination="W5J-9H-Hh8" id="GUH-iZ-bpj"/>
-                            <outlet property="delegate" destination="W5J-9H-Hh8" id="wF5-wT-a9v"/>
-                        </connections>
-                    </tableView>
-                    <navigationItem key="navigationItem" title="Notes" id="qEV-j6-mgs"/>
-                </tableViewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="EdI-tt-9ku" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="844" y="-694"/>
-        </scene>
-        <!--Navigation Controller-->
-        <scene sceneID="T7d-pv-yPb">
-            <objects>
-                <navigationController id="9Pb-qY-rWZ" sceneMemberID="viewController">
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="The-VJ-UzA">
-                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                    </navigationBar>
-                    <connections>
-                        <segue destination="W5J-9H-Hh8" kind="relationship" relationship="rootViewController" id="BVS-nq-ozN"/>
-                    </connections>
-                </navigationController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="rEf-Mb-LtK" userLabel="First Responder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="-107" y="-694"/>
-        </scene>
-        <!--Base View Controller-->
+        <!--Base Split View Controller-->
         <scene sceneID="pWJ-Id-Lvj">
             <objects>
-                <splitViewController id="AMj-Og-DqD" customClass="BaseViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController id="AMj-Og-DqD" customClass="BaseSplitViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
-                        <segue destination="9Pb-qY-rWZ" kind="relationship" relationship="masterViewController" id="3fA-iJ-N2N"/>
                         <segue destination="84C-Co-a5D" kind="relationship" relationship="detailViewController" id="gDp-X6-zUa"/>
+                        <segue destination="bai-xf-wRl" kind="relationship" relationship="masterViewController" id="0ak-BW-Tpd"/>
                     </connections>
                 </splitViewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="jD7-Y9-436" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -114,6 +122,24 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Hb9-UH-xxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="-108" y="7.6461769115442282"/>
+        </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="oGi-Q6-xs1">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="bai-xf-wRl" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="aoX-J7-hVf">
+                        <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="wPk-VX-raG" kind="relationship" relationship="rootViewController" id="ft8-kP-iZg"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u7x-aO-8Kf" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="557.60000000000002" y="-678.71064467766121"/>
         </scene>
     </scenes>
 </document>

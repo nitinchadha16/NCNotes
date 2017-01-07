@@ -12,11 +12,13 @@ protocol FruitSelectionDelegate: class {
     func fruitSelected(newFruit: String)
 }
 
-class MasterTableViewController: UITableViewController,UISplitViewControllerDelegate {
+class MasterTableViewController: BaseViewController,UISplitViewControllerDelegate,UITableViewDelegate,UITableViewDataSource {
+    
+    @IBOutlet weak var notesList: UITableView!
     
     weak var delegate: FruitSelectionDelegate?
-    weak var currentSplitViewController: BaseViewController?
-    
+    weak var currentSplitViewController: BaseSplitViewController?
+    @IBOutlet weak var separatorView: UIView!
     let dataSource = ["Mangoes","Apple","Orange","Watermelon"]
     
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
@@ -25,30 +27,39 @@ class MasterTableViewController: UITableViewController,UISplitViewControllerDele
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CELL")
+        notesList.register(UITableViewCell.self, forCellReuseIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER)
+        notesList.dataSource = self
+        notesList.delegate = self
+        notesList.backgroundColor = Colors.APP_BACKGROUND_COLOR
+        notesList.separatorColor = Colors.NAVIGATION_BAR_COLOR
+        
+        separatorView.backgroundColor = UIDevice.current.userInterfaceIdiom == .phone ? UIColor.clear :  Colors.NAVIGATION_BAR_COLOR
         currentSplitViewController?.delegate = self
+        self.title = Constants.APPLICATION_TITLE
     }
     
     // MARK: - Table view data source
     
-    override func numberOfSections(in tableView: UITableView) -> Int {
+    func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
-    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
     
-    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell:UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: "CELL", for: indexPath)
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        var cell:UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER, for: indexPath)
         if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: "CELL")
+            cell = UITableViewCell(style: .default, reuseIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER )
         }
         cell?.textLabel?.text = dataSource[indexPath.row]
+        cell?.backgroundColor = Colors.APP_BACKGROUND_COLOR
+        cell?.selectionStyle = .none
         return cell!
     }
     
-    override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.delegate?.fruitSelected(newFruit: dataSource[indexPath.row])
         if UIDevice.current.userInterfaceIdiom == .phone {
             currentSplitViewController?.showDetailViewController((delegate as? DetailedViewController)!, sender: nil)
