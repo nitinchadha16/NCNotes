@@ -13,7 +13,7 @@ protocol FruitSelectionDelegate: class {
 }
 
 class MasterTableViewController: UITableViewController,UISplitViewControllerDelegate {
-
+    
     weak var delegate: FruitSelectionDelegate?
     weak var currentSplitViewController: BaseViewController?
     
@@ -28,13 +28,13 @@ class MasterTableViewController: UITableViewController,UISplitViewControllerDele
         self.tableView.register(UITableViewCell.self, forCellReuseIdentifier: "CELL")
         currentSplitViewController?.delegate = self
     }
-
+    
     // MARK: - Table view data source
-
+    
     override func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
-
+    
     override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return dataSource.count
     }
@@ -53,7 +53,7 @@ class MasterTableViewController: UITableViewController,UISplitViewControllerDele
         if UIDevice.current.userInterfaceIdiom == .phone {
             currentSplitViewController?.showDetailViewController((delegate as? DetailedViewController)!, sender: nil)
         }else{
-           currentSplitViewController?.showDetailViewController(currentSplitViewController?.viewControllers.last as! UINavigationController, sender: nil)
+            currentSplitViewController?.showDetailViewController(currentSplitViewController?.viewControllers.last as! UINavigationController, sender: nil)
         }
     }
 }
