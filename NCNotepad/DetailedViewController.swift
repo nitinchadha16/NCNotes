@@ -12,6 +12,8 @@ class DetailedViewController: UIViewController {
 
     @IBOutlet weak var fruitNameLabel: UILabel!
     
+    @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
+    
     var fruitName:String!{
         didSet(newFruitName){
             if fruitNameLabel != nil {
@@ -22,7 +24,37 @@ class DetailedViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        registerForNotification()
+        initializeUserInterface()
         setUpNavigationBarUserInterface()
+    }
+    
+    func registerForNotification(){
+      
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
+    }
+    
+    func keyboardWillShow(notification: NSNotification) {
+        let info = notification.userInfo!
+        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        
+        UIView.animate(withDuration: 0.1, animations: { () -> Void in
+            self.textViewBottomConstraint.constant = keyboardFrame.size.height
+        })
+    }
+    
+    func keyboardWillHide(notification: NSNotification) {
+        UIView.animate(withDuration: 0.1, animations: { () -> Void in
+            self.textViewBottomConstraint.constant = 0
+        })
+    }
+
+    
+    
+    
+    func initializeUserInterface(){
+        self.view.backgroundColor = UIColor(colorLiteralRed: 0.976, green: 0.949, blue: 0.494, alpha: 1)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -35,6 +67,8 @@ class DetailedViewController: UIViewController {
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.title = "Nitin Chadha"
         self.navigationController?.navigationBar.isTranslucent = false
+        self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.white
+        self.navigationController?.navigationBar.tintColor = UIColor.white
     }
     
     func refreshUI(){
