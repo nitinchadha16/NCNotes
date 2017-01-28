@@ -135,7 +135,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     }
     
     func addNewNoteToDataSource() -> Notes{
-        let demoNote = Notes(id: 0, title: "Untitled Note", details: "DEMO_NOTE_NCNOTEPAD", sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: true)
+        let demoNote = Notes(id: 0, title: "Untitled Note", details: "", sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: true)
         NotesIndex.sharedInstance.addNoteToDataSource(note: demoNote)
         return demoNote
     }

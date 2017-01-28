@@ -39,12 +39,13 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     
     func refreshUI(){
         if currentNote.newNoteFlag! {
-            textContainer.text = Constants.DEFAULT_TEXT
+            textContainer.text = (currentNote.details == "" ? Constants.DEFAULT_TEXT : currentNote.details)
             self.title = ""
         }else{
             textContainer.text = currentNote.details
             self.title = currentNote.title
         }
+        textContainer.resignFirstResponder()
     }
     
     //MARK: Keyboard Register Notification Methods
@@ -70,14 +71,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     }
     
     //MARK: TextView Delegate Methods
-    
-
-    func textFieldDidChange(){
-        
-    }
-    
-    
-    
+  
     func textViewDidChange(_ textView: UITextView) {
         if currentNote.newNoteFlag! {
             if textContainer.text == Constants.DEFAULT_TEXT {
@@ -87,6 +81,9 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
                     self.title = textContainer.text
                 }
             }
+        }
+        if textContainer.text != "" && textContainer.text != Constants.DEFAULT_TEXT{
+            currentNote.details = textContainer.text
         }
     }
     
