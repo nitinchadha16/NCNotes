@@ -13,7 +13,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     @IBOutlet weak var fruitNameLabel: UILabel!
     @IBOutlet weak var textContainer: UITextView!
     
-    var masterTableView:MasterTableViewController?
+    var masterTableViewController:MasterTableViewController?
     
     @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
     
@@ -89,7 +89,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
             self.currentNote = note
             let notesIndexInstance = NotesIndex.sharedInstance
             notesIndexInstance.addNoteToDataSource(note: note)
-            self.masterTableView?.notesList.reloadData()
+            self.masterTableViewController?.notesList.reloadData()
             self.goBackToMasterViewController()
         }))
         
@@ -106,6 +106,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
             self.navigationController?.popViewController(animated: true)
         }else{
             self.title = currentNote.title
+            masterTableViewController?.tableViewDidSelect(indexPath: IndexPath(row: NotesIndex.sharedInstance.notesDataSource.count - 1, section: 0))
         }
     }
 }

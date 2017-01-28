@@ -16,7 +16,7 @@ class BaseSplitViewController: UISplitViewController {
         let leftNavController = self.viewControllers.first as! UINavigationController
         let masterViewController = leftNavController.topViewController as! MasterTableViewController
         let detailViewController = (self.viewControllers.last as! UINavigationController).viewControllers.first as! DetailedViewController
-        detailViewController.masterTableView = masterViewController
+        detailViewController.masterTableViewController = masterViewController
      //   let firstFruit = masterViewController.dataSource.first
         masterViewController.delegate = detailViewController
      //   detailViewController.fruitName = firstFruit

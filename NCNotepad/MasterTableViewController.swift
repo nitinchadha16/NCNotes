@@ -76,6 +76,11 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     //MARK: TableView Delegate Methods
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        tableViewDidSelect(indexPath: indexPath)
+        pushToDetailedViewController(creatingNewNote: false)
+    }
+    
+    func tableViewDidSelect(indexPath:IndexPath){
         if UIDevice.current.userInterfaceIdiom == .pad{
             if selectedIndex == nil {
                 selectedIndex = indexPath
@@ -87,23 +92,26 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
             }
         }
         self.delegate?.noteSelected(seletecedNote: noteIndexInstance.notesDataSource[indexPath.row] as! Notes)
-        pushToDetailedViewController()
-    }
-
-    //MARK: BarButton Action Handler
-    @IBAction func newBarButtonTapped(_ sender: AnyObject) {
-        (delegate as? DetailedViewController)?.currentNote = nil
-        pushToDetailedViewController()
     }
     
-    func pushToDetailedViewController(){
+
+    //MARK: BarButton Action Handler
+    
+    @IBAction func newBarButtonTapped(_ sender: AnyObject) {
+        (delegate as? DetailedViewController)?.currentNote = nil
+        pushToDetailedViewController(creatingNewNote: true)
+    }
+    
+    func pushToDetailedViewController(creatingNewNote:Bool){
         if UIDevice.current.userInterfaceIdiom == .phone {
             currentSplitViewController?.showDetailViewController((delegate as? DetailedViewController)!, sender: nil)
         }else{
             currentSplitViewController?.showDetailViewController(currentSplitViewController?.viewControllers.last as! UINavigationController, sender: nil)
+            if  (selectedIndex != nil && creatingNewNote) {
+                    let selectedIndexPath = selectedIndex
+                    selectedIndex = nil
+                    notesList.reloadRows(at: [selectedIndexPath!], with: .automatic)
+            }
         }
     }
-    
-    
-    
 }
