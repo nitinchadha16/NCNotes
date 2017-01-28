@@ -19,6 +19,10 @@ class NotesIndex: NSObject {
         return Static.instance
     }
     
+    func addNoteToDataSource(note:Notes){
+        notesDataSource.add(note)
+    }
+    
     //MARK: NSUSERDEAULT GETTER SETTER
     
     func getNotesDataSourceFromUserDefaults(){

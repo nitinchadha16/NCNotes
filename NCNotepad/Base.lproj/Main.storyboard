@@ -39,7 +39,14 @@
                             <constraint firstItem="dEL-qR-eqb" firstAttribute="leading" secondItem="sdy-eh-eT2" secondAttribute="leading" id="vfL-zE-Ich"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" title="Notes" id="QNU-6I-hdd"/>
+                    <navigationItem key="navigationItem" title="Notes" id="QNU-6I-hdd">
+                        <barButtonItem key="leftBarButtonItem" title="Delete" id="hgw-Xw-wFl"/>
+                        <barButtonItem key="rightBarButtonItem" title="New" id="IhG-R3-d8G">
+                            <connections>
+                                <action selector="newBarButtonTapped:" destination="wPk-VX-raG" id="Cqy-6M-jPL"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="notesList" destination="dEL-qR-eqb" id="Xn0-rG-QYu"/>
                         <outlet property="separatorView" destination="ECO-xz-3n7" id="djT-bO-Jad"/>
@@ -82,7 +89,13 @@
                             <constraint firstItem="J08-v4-gCg" firstAttribute="leading" secondItem="pM6-xF-Poi" secondAttribute="leading" constant="16" id="rlc-QZ-c9p"/>
                         </constraints>
                     </view>
-                    <navigationItem key="navigationItem" id="lvD-gz-5NE"/>
+                    <navigationItem key="navigationItem" id="lvD-gz-5NE">
+                        <barButtonItem key="rightBarButtonItem" title="Save" id="uxr-Au-mAk">
+                            <connections>
+                                <action selector="saveBarButtonTapped:" destination="Doc-ah-mUk" id="UKq-K6-s5e"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="fruitNameLabel" destination="O3X-Ur-GzN" id="EKZ-aC-C8E"/>
                         <outlet property="textContainer" destination="J08-v4-gCg" id="AGt-cp-AQG"/>

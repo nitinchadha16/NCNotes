@@ -8,18 +8,19 @@
 
 import UIKit
 
-protocol FruitSelectionDelegate: class {
-    func fruitSelected(newFruit: String)
+protocol NoteSelectionDelegate: class {
+    func noteSelected(seletecedNote: Notes)
 }
 
 class MasterTableViewController: BaseViewController,UISplitViewControllerDelegate,UITableViewDelegate,UITableViewDataSource {
     
     @IBOutlet weak var notesList: UITableView!
     
-    weak var delegate: FruitSelectionDelegate?
+    weak var delegate: NoteSelectionDelegate?
     weak var currentSplitViewController: BaseSplitViewController?
     @IBOutlet weak var separatorView: UIView!
-    let dataSource = ["Mangoes","Apple","Orange","Watermelon"]
+
+    var noteIndexInstance:NotesIndex = NotesIndex.sharedInstance
     
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
         return true
@@ -38,14 +39,19 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         self.title = Constants.APPLICATION_TITLE
     }
     
-    // MARK: - Table view data source
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        notesList.reloadData()
+    }
+    
+    // MARK: - TableView DataSource
     
     func numberOfSections(in tableView: UITableView) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return dataSource.count
+        return noteIndexInstance.notesDataSource.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -53,18 +59,35 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER )
         }
-        cell?.textLabel?.text = dataSource[indexPath.row]
+    
+        let notes:Notes = (noteIndexInstance.notesDataSource[indexPath.row] as! Notes)
+        cell?.textLabel?.text = notes.title
         cell?.backgroundColor = Colors.APP_BACKGROUND_COLOR
         cell?.selectionStyle = .none
         return cell!
     }
     
+    //MARK: TableView Delegate Methods
+    
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.delegate?.fruitSelected(newFruit: dataSource[indexPath.row])
+        self.delegate?.noteSelected(seletecedNote: noteIndexInstance.notesDataSource[indexPath.row] as! Notes)
+        pushToDetailedViewController()
+    }
+
+    //MARK: BarButton Action Handler
+    @IBAction func newBarButtonTapped(_ sender: AnyObject) {
+        (delegate as? DetailedViewController)?.currentNote = nil
+        pushToDetailedViewController()
+    }
+    
+    func pushToDetailedViewController(){
         if UIDevice.current.userInterfaceIdiom == .phone {
             currentSplitViewController?.showDetailViewController((delegate as? DetailedViewController)!, sender: nil)
         }else{
             currentSplitViewController?.showDetailViewController(currentSplitViewController?.viewControllers.last as! UINavigationController, sender: nil)
         }
     }
+    
+    
+    
 }

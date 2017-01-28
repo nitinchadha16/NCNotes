@@ -28,25 +28,25 @@ class Notes: NSObject {
     }
     
     required convenience init(coder aDecoder: NSCoder) {
-        let id = aDecoder.decodeInteger(forKey: "id")
-        let title = aDecoder.decodeObject(forKey: "title") as! String
-        let details = aDecoder.decodeObject(forKey: "details") as! String
-        let sortOrder = aDecoder.decodeInteger(forKey: "sortOrder")
-        let date = aDecoder.decodeObject(forKey: "date") as! Date
-        let time = aDecoder.decodeObject(forKey: "time") as! Date
-        let favoriteTag = aDecoder.decodeBool(forKey: "favoriteTag") 
+        let id = aDecoder.decodeInteger(forKey: PROPERTY_KEY.id)
+        let title = aDecoder.decodeObject(forKey: PROPERTY_KEY.title) as! String
+        let details = aDecoder.decodeObject(forKey: PROPERTY_KEY.details) as! String
+        let sortOrder = aDecoder.decodeInteger(forKey: PROPERTY_KEY.sortOrder)
+        let date = aDecoder.decodeObject(forKey: PROPERTY_KEY.date) as! Date
+        let time = aDecoder.decodeObject(forKey: PROPERTY_KEY.time) as! Date
+        let favoriteTag = aDecoder.decodeBool(forKey: PROPERTY_KEY.favoriteTag)
     
         self.init(id: id, title: title, details: details, sortOrder: sortOrder,date: date, time: time, favoriteTag: favoriteTag)
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(id, forKey: "id")
-        aCoder.encode(title, forKey: "title")
-        aCoder.encode(details, forKey: "details")
-        aCoder.encode(sortOrder, forKey: "sortOrder")
-        aCoder.encode(date, forKey: "date")
-        aCoder.encode(time, forKey: "time")
-        aCoder.encode(favoriteTag, forKey: "favoriteTagz")
+        aCoder.encode(id, forKey: PROPERTY_KEY.id)
+        aCoder.encode(title, forKey: PROPERTY_KEY.title)
+        aCoder.encode(details, forKey: PROPERTY_KEY.details)
+        aCoder.encode(sortOrder, forKey: PROPERTY_KEY.sortOrder)
+        aCoder.encode(date, forKey: PROPERTY_KEY.date)
+        aCoder.encode(time, forKey: PROPERTY_KEY.time)
+        aCoder.encode(favoriteTag, forKey: PROPERTY_KEY.favoriteTag)
     }
  
 }

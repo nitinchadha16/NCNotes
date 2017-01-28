@@ -15,9 +15,9 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     
     @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
     
-    var fruitName:String!{
-        didSet(newFruitName){
-            if fruitNameLabel != nil {
+    var currentNote:Notes!{
+        didSet(newNoteName){
+            if textContainer != nil {
                 refreshUI()
             }
         }
@@ -25,7 +25,6 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textContainer.text = Constants.DEFAULT_TEXT
         textContainer.delegate = self
         registerForNotification()
     }
@@ -37,14 +36,18 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     }
     
     func refreshUI(){
-        fruitNameLabel.text = fruitName
-        self.title = fruitName
+        if currentNote != nil {
+            textContainer.text = currentNote.details
+            self.title = currentNote.title
+        }else{
+            textContainer.text = Constants.DEFAULT_TEXT
+            self.title = ""
+        }
     }
     
     //MARK: Keyboard Register Notification Methods
     
     func registerForNotification(){
-      
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
     }
@@ -72,10 +75,37 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
         }
         return true
     }
+    
+    @IBAction func saveBarButtonTapped(_ sender: AnyObject) {
+
+        let confirmAlertBox = UIAlertController(title: nil, message: "Please provide title to your note", preferredStyle: .alert)
+    
+        confirmAlertBox.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
+        confirmAlertBox.addAction(UIAlertAction(title: "Save", style: .default, handler: { action -> Void in
+            let textField = confirmAlertBox.textFields?.first
+            let note = Notes.init(id: 0, title: (textField?.text)!, details: self.textContainer.text, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false)
+            let notesIndexInstance = NotesIndex.sharedInstance
+            notesIndexInstance.addNoteToDataSource(note: note)
+            self.goBackToMasterViewController()
+        }))
+        
+        confirmAlertBox.addTextField(configurationHandler: { (textField) -> Void in
+            textField.placeholder = "add Title"
+        })
+        
+        self.present(confirmAlertBox, animated: true, completion: nil)
+    }
+    
+    func goBackToMasterViewController(){
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.textContainer.resignFirstResponder()
+            self.navigationController?.popViewController(animated: true)
+        }
+    }
 }
 
-extension DetailedViewController: FruitSelectionDelegate {
-    func fruitSelected(newFruit: String) {
-        fruitName = newFruit
+extension DetailedViewController: NoteSelectionDelegate {
+    func noteSelected(seletecedNote: Notes) {
+        currentNote = seletecedNote
     }
 }
