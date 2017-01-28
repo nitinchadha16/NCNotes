@@ -8,16 +8,17 @@
 
 import UIKit
 
-class Notes: NSObject {
-    var id:             NSInteger?
-    var title:          String?
-    var details:        String?
-    var sortOrder:      NSInteger?
-    var date:           Date?
-    var time:           Date?
-    var favoriteTag:    Bool?
+class Notes: NSObject,NSCoding {
+    let id:             NSInteger!
+    let title:          String!
+    let details:        String!
+    let sortOrder:      NSInteger!
+    let date:           Date!
+    let time:           Date!
+    let favoriteTag:    Bool!
     
     init(id: NSInteger, title: String, details: String, sortOrder: NSInteger,date: Date, time: Date, favoriteTag: Bool) {
+    
         self.id = id
         self.title = title
         self.details = details
@@ -40,15 +41,16 @@ class Notes: NSObject {
     }
     
     func encode(with aCoder: NSCoder) {
-        aCoder.encode(id, forKey: PROPERTY_KEY.id)
-        aCoder.encode(title, forKey: PROPERTY_KEY.title)
-        aCoder.encode(details, forKey: PROPERTY_KEY.details)
-        aCoder.encode(sortOrder, forKey: PROPERTY_KEY.sortOrder)
-        aCoder.encode(date, forKey: PROPERTY_KEY.date)
-        aCoder.encode(time, forKey: PROPERTY_KEY.time)
-        aCoder.encode(favoriteTag, forKey: PROPERTY_KEY.favoriteTag)
+        
+        aCoder.encode(id!, forKey: PROPERTY_KEY.id)
+        aCoder.encode(title!, forKey: PROPERTY_KEY.title)
+        aCoder.encode(details!, forKey: PROPERTY_KEY.details)
+        aCoder.encode(sortOrder!, forKey: PROPERTY_KEY.sortOrder)
+        aCoder.encode(date!, forKey: PROPERTY_KEY.date)
+        aCoder.encode(time!, forKey: PROPERTY_KEY.time)
+        aCoder.encode(favoriteTag!, forKey: PROPERTY_KEY.favoriteTag)
     }
- 
+    
 }
 
 
