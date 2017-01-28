@@ -8,9 +8,10 @@
 
 import UIKit
 
-class DetailedViewController: BaseViewController {
+class DetailedViewController: BaseViewController,UITextViewDelegate {
 
     @IBOutlet weak var fruitNameLabel: UILabel!
+    @IBOutlet weak var textContainer: UITextView!
     
     @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
     
@@ -24,6 +25,8 @@ class DetailedViewController: BaseViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        textContainer.text = Constants.DEFAULT_TEXT
+        textContainer.delegate = self
         registerForNotification()
     }
     
@@ -32,6 +35,13 @@ class DetailedViewController: BaseViewController {
         refreshUI()
         
     }
+    
+    func refreshUI(){
+        fruitNameLabel.text = fruitName
+        self.title = fruitName
+    }
+    
+    //MARK: Keyboard Register Notification Methods
     
     func registerForNotification(){
       
@@ -54,9 +64,13 @@ class DetailedViewController: BaseViewController {
         })
     }
     
-    func refreshUI(){
-        fruitNameLabel.text = fruitName
-        self.title = fruitName
+    //MARK: TextView Delegate Methods
+    
+    func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
+        if textView.text == Constants.DEFAULT_TEXT {
+            textView.text = ""
+        }
+        return true
     }
 }
 

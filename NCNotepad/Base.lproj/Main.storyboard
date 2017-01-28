@@ -66,7 +66,7 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" text="Whats in your mind? .. " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="J08-v4-gCg">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="J08-v4-gCg">
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <fontDescription key="fontDescription" name="KannadaSangamMN" family="Kannada Sangam MN" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
@@ -85,6 +85,7 @@
                     <navigationItem key="navigationItem" id="lvD-gz-5NE"/>
                     <connections>
                         <outlet property="fruitNameLabel" destination="O3X-Ur-GzN" id="EKZ-aC-C8E"/>
+                        <outlet property="textContainer" destination="J08-v4-gCg" id="AGt-cp-AQG"/>
                         <outlet property="textViewBottomConstraint" destination="DNn-PQ-DqB" id="xYc-m4-l9n"/>
                     </connections>
                 </viewController>
@@ -110,7 +111,7 @@
             <objects>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="84C-Co-a5D" sceneMemberID="viewController">
                     <toolbarItems/>
-                    <navigationBar key="navigationBar" contentMode="scaleToFill" misplaced="YES" id="beY-do-6i5">
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="beY-do-6i5">
                         <rect key="frame" x="0.0" y="0.0" width="375" height="44"/>
                         <autoresizingMask key="autoresizingMask"/>
                     </navigationBar>

@@ -16,6 +16,8 @@
 		B2B0379F1E20D63E00B848FF /* MasterTableViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B0379C1E20D63E00B848FF /* MasterTableViewController.swift */; };
 		B2B037A31E212C9800B848FF /* BaseViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B037A21E212C9800B848FF /* BaseViewController.swift */; };
 		B2B037A51E21346500B848FF /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2B037A41E21346500B848FF /* Constants.swift */; };
+		B2FE34561E3CA4300040A52C /* Notes.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FE34551E3CA4300040A52C /* Notes.swift */; };
+		B2FE34581E3CA4A70040A52C /* NotesIndex.swift in Sources */ = {isa = PBXBuildFile; fileRef = B2FE34571E3CA4A70040A52C /* NotesIndex.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -30,6 +32,8 @@
 		B2B0379C1E20D63E00B848FF /* MasterTableViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterTableViewController.swift; sourceTree = "<group>"; };
 		B2B037A21E212C9800B848FF /* BaseViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseViewController.swift; sourceTree = "<group>"; };
 		B2B037A41E21346500B848FF /* Constants.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
+		B2FE34551E3CA4300040A52C /* Notes.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Notes.swift; sourceTree = "<group>"; };
+		B2FE34571E3CA4A70040A52C /* NotesIndex.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotesIndex.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -72,6 +76,8 @@
 				B2B0378F1E20D5EE00B848FF /* Assets.xcassets */,
 				B2B037911E20D5EE00B848FF /* LaunchScreen.storyboard */,
 				B2B037941E20D5EE00B848FF /* Info.plist */,
+				B2FE34551E3CA4300040A52C /* Notes.swift */,
+				B2FE34571E3CA4A70040A52C /* NotesIndex.swift */,
 			);
 			path = NCNotepad;
 			sourceTree = "<group>";
@@ -149,8 +155,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				B2B037A31E212C9800B848FF /* BaseViewController.swift in Sources */,
+				B2FE34561E3CA4300040A52C /* Notes.swift in Sources */,
 				B2B037A51E21346500B848FF /* Constants.swift in Sources */,
 				B2B037891E20D5EE00B848FF /* AppDelegate.swift in Sources */,
+				B2FE34581E3CA4A70040A52C /* NotesIndex.swift in Sources */,
 				B2B0379F1E20D63E00B848FF /* MasterTableViewController.swift in Sources */,
 				B2B0379D1E20D63E00B848FF /* BaseSplitViewController.swift in Sources */,
 				B2B0379E1E20D63E00B848FF /* DetailedViewController.swift in Sources */,
@@ -315,6 +323,7 @@
 				B2B037991E20D5EE00B848FF /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};

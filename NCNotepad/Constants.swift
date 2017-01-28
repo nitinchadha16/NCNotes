@@ -10,6 +10,7 @@ import UIKit
 
 struct Constants{
     static let APPLICATION_TITLE = "\"Notes\""
+    static let DEFAULT_TEXT = "What's in your mind!!"
 }
 
 struct Colors {
