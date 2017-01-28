@@ -60,12 +60,15 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         if cell == nil {
             cell = UITableViewCell(style: .default, reuseIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER )
         }
+        
+        let totalCount = noteIndexInstance.notesDataSource.count - 1
     
-        let notes:Notes = (noteIndexInstance.notesDataSource[indexPath.row] as! Notes)
+        let notes:Notes = (noteIndexInstance.notesDataSource[totalCount - indexPath.row] as! Notes)
         cell?.textLabel?.text = notes.title
         cell?.textLabel?.textColor = UIColor.black
         cell?.backgroundColor = Colors.APP_BACKGROUND_COLOR
         cell?.selectionStyle = .none
+        
         if UIDevice.current.userInterfaceIdiom == .pad && indexPath == selectedIndex{
             cell?.backgroundColor = Colors.NAVIGATION_BAR_COLOR
             cell?.textLabel?.textColor = UIColor.white
@@ -80,38 +83,61 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         pushToDetailedViewController(creatingNewNote: false)
     }
     
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+        return true
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete{
+            noteIndexInstance.removeNoteAtIndex(index: noteIndexInstance.notesDataSource.count - 1 - indexPath.row)
+            notesList.beginUpdates()
+            notesList.deleteRows(at: [indexPath], with: .automatic)
+            notesList.endUpdates()
+        }
+    }
+    
     func tableViewDidSelect(indexPath:IndexPath){
         if UIDevice.current.userInterfaceIdiom == .pad{
-            if selectedIndex == nil {
+            if selectedIndex == nil  {
                 selectedIndex = indexPath
                 notesList.reloadRows(at: [indexPath], with: .none)
             }else{
-                let oldIndexPath = selectedIndex
                 selectedIndex = indexPath
-                notesList.reloadRows(at: [indexPath,oldIndexPath!], with: .none)
+                notesList.reloadRows(at: notesList.indexPathsForVisibleRows!, with: .none)
             }
         }
-        self.delegate?.noteSelected(seletecedNote: noteIndexInstance.notesDataSource[indexPath.row] as! Notes)
+        let count = noteIndexInstance.notesDataSource.count
+        self.delegate?.noteSelected(seletecedNote: noteIndexInstance.notesDataSource[count - indexPath.row - 1] as! Notes)
     }
     
 
     //MARK: BarButton Action Handler
     
     @IBAction func newBarButtonTapped(_ sender: AnyObject) {
-        (delegate as? DetailedViewController)?.currentNote = nil
         pushToDetailedViewController(creatingNewNote: true)
     }
     
     func pushToDetailedViewController(creatingNewNote:Bool){
         if UIDevice.current.userInterfaceIdiom == .phone {
             currentSplitViewController?.showDetailViewController((delegate as? DetailedViewController)!, sender: nil)
+            if  (creatingNewNote) {
+                (delegate as? DetailedViewController)?.currentNote = addNewNoteToDataSource()
+            }
         }else{
             currentSplitViewController?.showDetailViewController(currentSplitViewController?.viewControllers.last as! UINavigationController, sender: nil)
-            if  (selectedIndex != nil && creatingNewNote) {
-                    let selectedIndexPath = selectedIndex
+            if  (creatingNewNote) {
                     selectedIndex = nil
-                    notesList.reloadRows(at: [selectedIndexPath!], with: .automatic)
+                    (delegate as? DetailedViewController)?.currentNote = addNewNoteToDataSource()
+                    notesList.reloadData()
+                    tableViewDidSelect(indexPath: IndexPath(row: 0, section: 0))
             }
         }
     }
+    
+    func addNewNoteToDataSource() -> Notes{
+        let demoNote = Notes(id: 0, title: "Untitled Note", details: "DEMO_NOTE_NCNOTEPAD", sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: true)
+        NotesIndex.sharedInstance.addNoteToDataSource(note: demoNote)
+        return demoNote
+    }
+    
 }

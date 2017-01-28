@@ -17,9 +17,13 @@ class BaseSplitViewController: UISplitViewController {
         let masterViewController = leftNavController.topViewController as! MasterTableViewController
         let detailViewController = (self.viewControllers.last as! UINavigationController).viewControllers.first as! DetailedViewController
         detailViewController.masterTableViewController = masterViewController
-     //   let firstFruit = masterViewController.dataSource.first
+        
+        if UIDevice.current.userInterfaceIdiom == .pad && NotesIndex.sharedInstance.notesDataSource.count > 0 {
+            let firstFruit = NotesIndex.sharedInstance.notesDataSource.lastObject as! Notes
+            detailViewController.currentNote = firstFruit
+        }
+        
         masterViewController.delegate = detailViewController
-     //   detailViewController.fruitName = firstFruit
         masterViewController.currentSplitViewController = self
         
         self.preferredDisplayMode = .allVisible

@@ -16,4 +16,5 @@ struct PROPERTY_KEY {
     static let date         =  "date"
     static let time         =  "time"
     static let favoriteTag  =  "favoriteTag"
+    static let newNoteFlag  =  "newNoteFlag"
 }

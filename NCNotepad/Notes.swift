@@ -9,15 +9,16 @@
 import UIKit
 
 class Notes: NSObject,NSCoding {
-    let id:             NSInteger!
-    let title:          String!
-    let details:        String!
-    let sortOrder:      NSInteger!
-    let date:           Date!
-    let time:           Date!
-    let favoriteTag:    Bool!
+    var id:             NSInteger?
+    var title:          String?
+    var details:        String?
+    var sortOrder:      NSInteger?
+    var date:           Date?
+    var time:           Date?
+    var favoriteTag:    Bool?
+    var newNoteFlag:    Bool?
     
-    init(id: NSInteger, title: String, details: String, sortOrder: NSInteger,date: Date, time: Date, favoriteTag: Bool) {
+    init(id: NSInteger, title: String, details: String, sortOrder: NSInteger,date: Date, time: Date, favoriteTag: Bool, newNoteFlag: Bool) {
     
         self.id = id
         self.title = title
@@ -26,6 +27,7 @@ class Notes: NSObject,NSCoding {
         self.date = date
         self.time = time
         self.favoriteTag = favoriteTag
+        self.newNoteFlag = newNoteFlag
     }
     
     required convenience init(coder aDecoder: NSCoder) {
@@ -36,8 +38,9 @@ class Notes: NSObject,NSCoding {
         let date = aDecoder.decodeObject(forKey: PROPERTY_KEY.date) as! Date
         let time = aDecoder.decodeObject(forKey: PROPERTY_KEY.time) as! Date
         let favoriteTag = aDecoder.decodeBool(forKey: PROPERTY_KEY.favoriteTag)
+        let newNoteFlag = aDecoder.decodeBool(forKey: PROPERTY_KEY.newNoteFlag)
     
-        self.init(id: id, title: title, details: details, sortOrder: sortOrder,date: date, time: time, favoriteTag: favoriteTag)
+        self.init(id: id, title: title, details: details, sortOrder: sortOrder,date: date, time: time, favoriteTag: favoriteTag, newNoteFlag: newNoteFlag)
     }
     
     func encode(with aCoder: NSCoder) {
@@ -49,6 +52,7 @@ class Notes: NSObject,NSCoding {
         aCoder.encode(date!, forKey: PROPERTY_KEY.date)
         aCoder.encode(time!, forKey: PROPERTY_KEY.time)
         aCoder.encode(favoriteTag!, forKey: PROPERTY_KEY.favoriteTag)
+        aCoder.encode(newNoteFlag!, forKey: PROPERTY_KEY.newNoteFlag)
     }
     
 }

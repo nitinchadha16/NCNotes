@@ -30,7 +30,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
         textContainer.delegate = self
         registerForNotification()
     }
-    
+
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshUI()
@@ -38,12 +38,12 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     }
     
     func refreshUI(){
-        if currentNote != nil {
-            textContainer.text = currentNote.details
-            self.title = currentNote.title
-        }else{
+        if currentNote.newNoteFlag! {
             textContainer.text = Constants.DEFAULT_TEXT
             self.title = ""
+        }else{
+            textContainer.text = currentNote.details
+            self.title = currentNote.title
         }
     }
     
@@ -71,32 +71,62 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     
     //MARK: TextView Delegate Methods
     
+
+    func textFieldDidChange(){
+        
+    }
+    
+    
+    
+    func textViewDidChange(_ textView: UITextView) {
+        if currentNote.newNoteFlag! {
+            if textContainer.text == Constants.DEFAULT_TEXT {
+                textContainer.text = ""
+            }else{
+                if textContainer.text.characters.count < 20 {
+                    self.title = textContainer.text
+                }
+            }
+        }
+    }
+    
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        if textView.text == Constants.DEFAULT_TEXT {
-            textView.text = ""
+        if currentNote.newNoteFlag! && textContainer.text == Constants.DEFAULT_TEXT {
+                textContainer.text = ""
         }
         return true
     }
     
+    
+    
     @IBAction func saveBarButtonTapped(_ sender: AnyObject) {
-
-        let confirmAlertBox = UIAlertController(title: nil, message: "Please provide title to your note", preferredStyle: .alert)
+        
+        if currentNote.newNoteFlag! == false {
+            currentNote.details = textContainer.text
+        }else{
+            showTitleNameAlertView()
+        }
+    }
+    
+    func showTitleNameAlertView(){
+    
+        let confirmAlertBox = UIAlertController(title: "New Note", message: "Please provide title to your note", preferredStyle: .alert)
     
         confirmAlertBox.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         confirmAlertBox.addAction(UIAlertAction(title: "Save", style: .default, handler: { action -> Void in
-            let textField = confirmAlertBox.textFields?.first
-            let note = Notes.init(id: 0, title: (textField?.text)!, details: self.textContainer.text, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false)
-            self.currentNote = note
-            let notesIndexInstance = NotesIndex.sharedInstance
-            notesIndexInstance.addNoteToDataSource(note: note)
-            self.masterTableViewController?.notesList.reloadData()
-            self.goBackToMasterViewController()
+        let textField = confirmAlertBox.textFields?.first
+            let note = Notes.init(id: 0, title: ((textField?.text)! == "" ? self.title : textField?.text)!, details: self.textContainer.text, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: false)
+        let notesIndexInstance = NotesIndex.sharedInstance
+        notesIndexInstance.replaceNoteWithOtherNote(replacedNote: self.currentNote, newNote: note)
+        self.currentNote = note
+        self.masterTableViewController?.notesList.reloadData()
+        self.goBackToMasterViewController()
         }))
-        
+    
         confirmAlertBox.addTextField(configurationHandler: { (textField) -> Void in
-            textField.placeholder = "add Title"
+        textField.placeholder = self.title
         })
-        
+    
         self.present(confirmAlertBox, animated: true, completion: nil)
     }
     
@@ -106,7 +136,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
             self.navigationController?.popViewController(animated: true)
         }else{
             self.title = currentNote.title
-            masterTableViewController?.tableViewDidSelect(indexPath: IndexPath(row: NotesIndex.sharedInstance.notesDataSource.count - 1, section: 0))
+            masterTableViewController?.tableViewDidSelect(indexPath: IndexPath(row: NotesIndex.sharedInstance.notesDataSource.count - 1 - NotesIndex.sharedInstance.notesDataSource.index(of: currentNote), section: 0))
         }
     }
 }

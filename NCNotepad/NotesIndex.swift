@@ -23,6 +23,14 @@ class NotesIndex: NSObject {
         notesDataSource.add(note)
     }
     
+    func removeNoteAtIndex(index: NSInteger){
+        notesDataSource.removeObject(at: index)
+    }
+    
+    func replaceNoteWithOtherNote(replacedNote: Notes, newNote:Notes){
+        notesDataSource.replaceObject(at: notesDataSource.index(of: replacedNote), with: newNote)
+    }
+    
     //MARK: NSUSERDEAULT GETTER SETTER
     
     func getNotesDataSourceFromUserDefaults(){
