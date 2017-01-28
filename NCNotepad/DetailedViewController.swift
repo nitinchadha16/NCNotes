@@ -13,6 +13,8 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     @IBOutlet weak var fruitNameLabel: UILabel!
     @IBOutlet weak var textContainer: UITextView!
     
+    var masterTableView:MasterTableViewController?
+    
     @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
     
     var currentNote:Notes!{
@@ -84,8 +86,10 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
         confirmAlertBox.addAction(UIAlertAction(title: "Save", style: .default, handler: { action -> Void in
             let textField = confirmAlertBox.textFields?.first
             let note = Notes.init(id: 0, title: (textField?.text)!, details: self.textContainer.text, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false)
+            self.currentNote = note
             let notesIndexInstance = NotesIndex.sharedInstance
             notesIndexInstance.addNoteToDataSource(note: note)
+            self.masterTableView?.notesList.reloadData()
             self.goBackToMasterViewController()
         }))
         
@@ -100,6 +104,8 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
         if UIDevice.current.userInterfaceIdiom == .phone {
             self.textContainer.resignFirstResponder()
             self.navigationController?.popViewController(animated: true)
+        }else{
+            self.title = currentNote.title
         }
     }
 }

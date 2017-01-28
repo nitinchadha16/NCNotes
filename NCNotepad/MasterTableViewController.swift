@@ -20,6 +20,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     weak var currentSplitViewController: BaseSplitViewController?
     @IBOutlet weak var separatorView: UIView!
 
+    var selectedIndex:IndexPath?
     var noteIndexInstance:NotesIndex = NotesIndex.sharedInstance
     
     func splitViewController(_ splitViewController: UISplitViewController, collapseSecondary secondaryViewController: UIViewController, onto primaryViewController: UIViewController) -> Bool {
@@ -62,14 +63,29 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     
         let notes:Notes = (noteIndexInstance.notesDataSource[indexPath.row] as! Notes)
         cell?.textLabel?.text = notes.title
+        cell?.textLabel?.textColor = UIColor.black
         cell?.backgroundColor = Colors.APP_BACKGROUND_COLOR
         cell?.selectionStyle = .none
+        if UIDevice.current.userInterfaceIdiom == .pad && indexPath == selectedIndex{
+            cell?.backgroundColor = Colors.NAVIGATION_BAR_COLOR
+            cell?.textLabel?.textColor = UIColor.white
+        }
         return cell!
     }
     
     //MARK: TableView Delegate Methods
     
      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        if UIDevice.current.userInterfaceIdiom == .pad{
+            if selectedIndex == nil {
+                selectedIndex = indexPath
+                notesList.reloadRows(at: [indexPath], with: .none)
+            }else{
+                let oldIndexPath = selectedIndex
+                selectedIndex = indexPath
+                notesList.reloadRows(at: [indexPath,oldIndexPath!], with: .none)
+            }
+        }
         self.delegate?.noteSelected(seletecedNote: noteIndexInstance.notesDataSource[indexPath.row] as! Notes)
         pushToDetailedViewController()
     }
