@@ -42,6 +42,16 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
+        if UIDevice.current.userInterfaceIdiom == .pad && noteIndexInstance.notesDataSource.count == 0 {
+            pushToDetailedViewController(creatingNewNote: true)
+        }else{
+            if noteIndexInstance.notesDataSource.count > 0 {
+                let lastNote:Notes = noteIndexInstance.notesDataSource.lastObject as! Notes
+                if lastNote.title == "Untitled Note" && lastNote.details == ""{
+                    noteIndexInstance.notesDataSource.remove(lastNote)
+                }
+            }
+        }
         notesList.reloadData()
     }
     
@@ -68,6 +78,9 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         cell?.textLabel?.textColor = UIColor.black
         cell?.backgroundColor = Colors.APP_BACKGROUND_COLOR
         cell?.selectionStyle = .none
+        let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        imageView.image = #imageLiteral(resourceName: "favorite")
+        cell?.accessoryView = notes.favoriteTag! ? imageView : UIView()
         
         if UIDevice.current.userInterfaceIdiom == .pad && indexPath == selectedIndex{
             cell?.backgroundColor = Colors.NAVIGATION_BAR_COLOR
@@ -89,10 +102,20 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-            noteIndexInstance.removeNoteAtIndex(index: noteIndexInstance.notesDataSource.count - 1 - indexPath.row)
+            let noteToRemove:Notes = noteIndexInstance.notesDataSource[noteIndexInstance.notesDataSource.count - 1 - indexPath.row] as! Notes
+            noteIndexInstance.notesDataSource.remove(noteToRemove)
             notesList.beginUpdates()
             notesList.deleteRows(at: [indexPath], with: .automatic)
             notesList.endUpdates()
+            
+            if UIDevice.current.userInterfaceIdiom == .pad {
+                if noteIndexInstance.notesDataSource.count == 0 {
+                    pushToDetailedViewController(creatingNewNote: true)
+                }else if noteToRemove == (delegate as? DetailedViewController)?.currentNote{
+                    tableViewDidSelect(indexPath: IndexPath(row: 0, section: 0))
+                }
+            }
+            
         }
     }
     

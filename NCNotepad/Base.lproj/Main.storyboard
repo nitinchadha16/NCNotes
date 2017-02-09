@@ -1,15 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11201" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AMj-Og-DqD">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11762" systemVersion="16C67" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="AMj-Og-DqD">
+    <device id="retina4_7" orientation="portrait">
+        <adaptation id="fullscreen"/>
+    </device>
     <dependencies>
-        <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11161"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
         <!--Notes-->
         <scene sceneID="e4T-Vl-gbf">
             <objects>
-                <viewController id="wPk-VX-raG" customClass="MasterTableViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="wPk-VX-raG" customClass="MasterTableViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="HPb-jr-oT9"/>
                         <viewControllerLayoutGuide type="bottom" id="JdP-S6-Wl6"/>
@@ -19,9 +21,11 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="dEL-qR-eqb">
+                                <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                             </tableView>
                             <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="ECO-xz-3n7">
+                                <rect key="frame" x="374" y="0.0" width="1" height="667"/>
                                 <color key="backgroundColor" red="0.89471340669999999" green="0.43732544600000001" blue="0.53224973369999995" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="1" id="2Yi-VN-bj2"/>
@@ -59,7 +63,7 @@
         <!--Detailed View Controller-->
         <scene sceneID="Eua-xy-wfY">
             <objects>
-                <viewController id="Doc-ah-mUk" customClass="DetailedViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController automaticallyAdjustsScrollViewInsets="NO" id="Doc-ah-mUk" customClass="DetailedViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="aod-b2-qK7"/>
                         <viewControllerLayoutGuide type="bottom" id="3sU-Ps-tqP"/>
@@ -68,25 +72,19 @@
                         <rect key="frame" x="0.0" y="0.0" width="375" height="667"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label hidden="YES" opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="O3X-Ur-GzN">
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
-                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="J08-v4-gCg">
+                            <textView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" keyboardDismissMode="onDrag" text="b dbja, bd,jbad ,jb d,jbb ,jb adjb, jb jb,d " textAlignment="natural" translatesAutoresizingMaskIntoConstraints="NO" id="J08-v4-gCg">
+                                <rect key="frame" x="10" y="64" width="365" height="603"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                                <fontDescription key="fontDescription" name="KannadaSangamMN" family="Kannada Sangam MN" pointSize="15"/>
+                                <fontDescription key="fontDescription" name="Georgia" family="Georgia" pointSize="15"/>
                                 <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                             </textView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="J08-v4-gCg" firstAttribute="top" secondItem="aod-b2-qK7" secondAttribute="bottom" constant="13" id="Czy-0E-rKd"/>
-                            <constraint firstItem="3sU-Ps-tqP" firstAttribute="top" secondItem="J08-v4-gCg" secondAttribute="bottom" id="DNn-PQ-DqB"/>
-                            <constraint firstAttribute="trailing" secondItem="J08-v4-gCg" secondAttribute="trailing" constant="7" id="cDZ-h8-tbB"/>
-                            <constraint firstItem="O3X-Ur-GzN" firstAttribute="centerY" secondItem="pM6-xF-Poi" secondAttribute="centerY" id="dn7-LO-qvZ"/>
-                            <constraint firstItem="O3X-Ur-GzN" firstAttribute="centerX" secondItem="pM6-xF-Poi" secondAttribute="centerX" id="oSd-AQ-yAn"/>
-                            <constraint firstItem="J08-v4-gCg" firstAttribute="leading" secondItem="pM6-xF-Poi" secondAttribute="leading" constant="16" id="rlc-QZ-c9p"/>
+                            <constraint firstAttribute="trailing" secondItem="J08-v4-gCg" secondAttribute="trailing" id="68s-EK-WYh"/>
+                            <constraint firstItem="J08-v4-gCg" firstAttribute="leading" secondItem="pM6-xF-Poi" secondAttribute="leading" constant="10" id="83Q-b0-B3X"/>
+                            <constraint firstItem="3sU-Ps-tqP" firstAttribute="top" secondItem="J08-v4-gCg" secondAttribute="bottom" id="acG-qB-7s4"/>
+                            <constraint firstItem="J08-v4-gCg" firstAttribute="top" secondItem="aod-b2-qK7" secondAttribute="bottom" id="wj4-iO-k6b"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" id="lvD-gz-5NE">
@@ -97,9 +95,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
-                        <outlet property="fruitNameLabel" destination="O3X-Ur-GzN" id="EKZ-aC-C8E"/>
+                        <outlet property="rightBarButtonItem" destination="uxr-Au-mAk" id="Pcu-IV-fNn"/>
                         <outlet property="textContainer" destination="J08-v4-gCg" id="AGt-cp-AQG"/>
-                        <outlet property="textViewBottomConstraint" destination="DNn-PQ-DqB" id="xYc-m4-l9n"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="URa-m0-JF2" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -109,7 +106,7 @@
         <!--Base Split View Controller-->
         <scene sceneID="pWJ-Id-Lvj">
             <objects>
-                <splitViewController id="AMj-Og-DqD" customClass="BaseSplitViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
+                <splitViewController automaticallyAdjustsScrollViewInsets="NO" id="AMj-Og-DqD" customClass="BaseSplitViewController" customModule="NCNotepad" customModuleProvider="target" sceneMemberID="viewController">
                     <connections>
                         <segue destination="84C-Co-a5D" kind="relationship" relationship="detailViewController" id="gDp-X6-zUa"/>
                         <segue destination="bai-xf-wRl" kind="relationship" relationship="masterViewController" id="0ak-BW-Tpd"/>

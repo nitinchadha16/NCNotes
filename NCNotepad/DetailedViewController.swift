@@ -10,12 +10,10 @@ import UIKit
 
 class DetailedViewController: BaseViewController,UITextViewDelegate {
 
-    @IBOutlet weak var fruitNameLabel: UILabel!
+    @IBOutlet weak var rightBarButtonItem: UIBarButtonItem!
     @IBOutlet weak var textContainer: UITextView!
     
     var masterTableViewController:MasterTableViewController?
-    
-    @IBOutlet weak var textViewBottomConstraint: NSLayoutConstraint!
     
     var currentNote:Notes!{
         didSet(newNoteName){
@@ -27,82 +25,98 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        textContainer.delegate = self
         registerForNotification()
+        textContainer.contentInset = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
+        textContainer.contentSize = CGSize(width: textContainer.frame.size.height, height: textContainer.contentSize.height)
+        textContainer.showsHorizontalScrollIndicator = false
     }
-
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         refreshUI()
+    }
+    
+    func getAttributedTextForString(string: String) -> NSAttributedString{
+        textContainer.delegate = self
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineHeightMultiple = 19.0;
+        paragraphStyle.maximumLineHeight = 19.0;
+        paragraphStyle.minimumLineHeight = 19.0;
+
+        let ats = [NSFontAttributeName: UIFont(name: "Helvetica Neue", size: 16.0)!, NSParagraphStyleAttributeName: paragraphStyle]
         
+        return NSAttributedString(string: string, attributes: ats)
     }
     
     func refreshUI(){
         if currentNote.newNoteFlag! {
-            textContainer.text = (currentNote.details == "" ? Constants.DEFAULT_TEXT : currentNote.details)
+            textContainer.attributedText = (currentNote.details == "" ? getAttributedTextForString(string: Constants.DEFAULT_TEXT) : getAttributedTextForString(string: currentNote.details!))
             self.title = ""
+            rightBarButtonItem.title = "Save"
         }else{
-            textContainer.text = currentNote.details
+            textContainer.attributedText = getAttributedTextForString(string: currentNote.details!)
             self.title = currentNote.title
+            rightBarButtonItem.title = "More"
         }
-        textContainer.resignFirstResponder()
+        if UIDevice.current.userInterfaceIdiom == .phone {
+            self.view.endEditing(true)
+        }
     }
     
     //MARK: Keyboard Register Notification Methods
     
     func registerForNotification(){
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name:NSNotification.Name.UIKeyboardWillHide, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name:NSNotification.Name.UIKeyboardWillShow, object: nil);
-    }
-    
-    func keyboardWillShow(notification: NSNotification) {
-        let info = notification.userInfo!
-        let keyboardFrame: CGRect = (info[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
-        
-        UIView.animate(withDuration: 0.1, animations: { () -> Void in
-            self.textViewBottomConstraint.constant = keyboardFrame.size.height
-        })
-    }
-    
-    func keyboardWillHide(notification: NSNotification) {
-        UIView.animate(withDuration: 0.1, animations: { () -> Void in
-            self.textViewBottomConstraint.constant = 0
-        })
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailedViewController.updateTextViewContentIntent(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil);
+        NotificationCenter.default.addObserver(self, selector: #selector(DetailedViewController.updateTextViewContentIntent(_:)), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil);
     }
     
     //MARK: TextView Delegate Methods
   
     func textViewDidChange(_ textView: UITextView) {
         if currentNote.newNoteFlag! {
-            if textContainer.text == Constants.DEFAULT_TEXT {
-                textContainer.text = ""
+            if textContainer.attributedText.string == Constants.DEFAULT_TEXT {
+                textContainer.attributedText = getAttributedTextForString(string: "")
             }else{
-                if textContainer.text.characters.count < 20 {
-                    self.title = textContainer.text
+                if textContainer.attributedText.string.characters.count < 20 {
+                    self.title = textContainer.attributedText.string
                 }
             }
         }
-        if textContainer.text != "" && textContainer.text != Constants.DEFAULT_TEXT{
-            currentNote.details = textContainer.text
+        if textContainer.attributedText.string != "" && textContainer.attributedText.string != Constants.DEFAULT_TEXT{
+            currentNote.details = textContainer.attributedText.string
         }
     }
     
     func textViewShouldBeginEditing(_ textView: UITextView) -> Bool {
-        if currentNote.newNoteFlag! && textContainer.text == Constants.DEFAULT_TEXT {
-                textContainer.text = ""
+        if currentNote.newNoteFlag! && textContainer.attributedText.string == Constants.DEFAULT_TEXT {
+                textContainer.attributedText = getAttributedTextForString(string: "")
         }
         return true
     }
     
-    
-    
+
+    //MARK: Bar Button Actions
     @IBAction func saveBarButtonTapped(_ sender: AnyObject) {
-        
+
         if currentNote.newNoteFlag! == false {
-            currentNote.details = textContainer.text
+            currentNote.details = textContainer.attributedText.string
+            showOptionList()
         }else{
             showTitleNameAlertView()
         }
+    }
+    
+    //MARK: Options List Method
+    
+    func showOptionList(){
+        let settingsAlertView = UIAlertController(title: "", message: "Settings", preferredStyle: .actionSheet)
+        let favoriteText = currentNote.favoriteTag! ? "Remove from favorites" : "Add to favorites"
+        settingsAlertView.addAction(UIAlertAction(title: favoriteText, style: .default, handler: {(alert: UIAlertAction!) in
+                self.currentNote.favoriteTag = !self.currentNote.favoriteTag!
+                self.masterTableViewController?.notesList.reloadData()
+        }))
+        settingsAlertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        self.present(settingsAlertView, animated: true, completion: nil)
     }
     
     func showTitleNameAlertView(){
@@ -112,7 +126,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
         confirmAlertBox.addAction(UIAlertAction(title: "Cancel", style: .destructive, handler: nil))
         confirmAlertBox.addAction(UIAlertAction(title: "Save", style: .default, handler: { action -> Void in
         let textField = confirmAlertBox.textFields?.first
-            let note = Notes.init(id: 0, title: ((textField?.text)! == "" ? self.title : textField?.text)!, details: self.textContainer.text, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: false)
+            let note = Notes.init(id: 0, title: ((textField?.text)! == "" ? self.title : textField?.text)!, details: self.textContainer.attributedText.string, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: false)
         let notesIndexInstance = NotesIndex.sharedInstance
         notesIndexInstance.replaceNoteWithOtherNote(replacedNote: self.currentNote, newNote: note)
         self.currentNote = note
@@ -136,6 +150,24 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
             masterTableViewController?.tableViewDidSelect(indexPath: IndexPath(row: NotesIndex.sharedInstance.notesDataSource.count - 1 - NotesIndex.sharedInstance.notesDataSource.index(of: currentNote), section: 0))
         }
     }
+    
+    func updateTextViewContentIntent(_ notifaction: NSNotification){
+        let userInfo = notifaction.userInfo!
+        
+        let keyboardEndFrameScreenCordinates = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
+        let keyboardEndFrame = self.view.convert(keyboardEndFrameScreenCordinates, to: self.view.window)
+        
+        if notifaction.name == Notification.Name.UIKeyboardWillHide{
+            textContainer.contentInset = UIEdgeInsets.zero
+            textContainer.scrollIndicatorInsets = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
+        }else{
+            textContainer.contentInset = UIEdgeInsets(top: 13, left: 0, bottom: keyboardEndFrame.height, right: 0)
+            textContainer.scrollIndicatorInsets = textContainer.contentInset
+        }
+        
+        textContainer.scrollRangeToVisible(textContainer.selectedRange)
+    }
+    
 }
 
 extension DetailedViewController: NoteSelectionDelegate {
