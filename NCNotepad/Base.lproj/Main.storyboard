@@ -44,8 +44,8 @@
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="Notes" id="QNU-6I-hdd">
-                        <barButtonItem key="leftBarButtonItem" title="Delete" id="hgw-Xw-wFl"/>
-                        <barButtonItem key="rightBarButtonItem" title="New" id="IhG-R3-d8G">
+                        <barButtonItem key="rightBarButtonItem" image="new_note" id="IhG-R3-d8G">
+                            <color key="tintColor" white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                             <connections>
                                 <action selector="newBarButtonTapped:" destination="wPk-VX-raG" id="Cqy-6M-jPL"/>
                             </connections>
@@ -153,4 +153,7 @@
             <point key="canvasLocation" x="557.60000000000002" y="-678.71064467766121"/>
         </scene>
     </scenes>
+    <resources>
+        <image name="new_note" width="25" height="25"/>
+    </resources>
 </document>

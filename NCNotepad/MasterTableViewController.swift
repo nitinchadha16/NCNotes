@@ -77,7 +77,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         let notes:Notes = (noteIndexInstance.notesDataSource[totalCount - indexPath.row] as! Notes)
         cell?.textLabel?.text = notes.title
         cell?.textLabel?.textColor = UIColor.black
-        cell?.detailTextLabel?.text = "Feb 11,2017  " + notes.details!
+        cell?.detailTextLabel?.text = ServiceManager().convertDateFormater(date: notes.date!) + "  " + notes.details!
         cell?.detailTextLabel?.textColor = UIColor.black
          
         cell?.backgroundColor = Colors.APP_BACKGROUND_COLOR
@@ -90,6 +90,8 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
             cell?.backgroundColor = Colors.NAVIGATION_BAR_COLOR
             cell?.textLabel?.textColor = UIColor.white
             cell?.detailTextLabel?.textColor = UIColor.white
+            imageView.image = #imageLiteral(resourceName: "favorite_ipad_yellow")
+            cell?.accessoryView = notes.favoriteTag! ? imageView : UIView()
         }
         return cell!
     }

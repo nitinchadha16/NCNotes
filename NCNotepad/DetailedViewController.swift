@@ -29,6 +29,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
         textContainer.contentInset = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
         textContainer.contentSize = CGSize(width: textContainer.frame.size.height, height: textContainer.contentSize.height)
         textContainer.showsHorizontalScrollIndicator = false
+        textContainer.keyboardDismissMode = (UIDevice.current.userInterfaceIdiom == .pad) ? .none : .onDrag
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +68,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     
     func registerForNotification(){
         NotificationCenter.default.addObserver(self, selector: #selector(DetailedViewController.updateTextViewContentIntent(_:)), name: Notification.Name.UIKeyboardWillHide, object: nil);
-        NotificationCenter.default.addObserver(self, selector: #selector(DetailedViewController.updateTextViewContentIntent(_:)), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil);
+   //     NotificationCenter.default.addObserver(self, selector: #selector(DetailedViewController.updateTextViewContentIntent(_:)), name: Notification.Name.UIKeyboardWillChangeFrame, object: nil);
     }
     
     //MARK: TextView Delegate Methods
@@ -166,12 +167,12 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
         let keyboardEndFrameScreenCordinates = (userInfo[UIKeyboardFrameEndUserInfoKey] as! NSValue).cgRectValue
         let keyboardEndFrame = self.view.convert(keyboardEndFrameScreenCordinates, to: self.view.window)
         
-        if notifaction.name == Notification.Name.UIKeyboardWillHide{
-            textContainer.contentInset = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
-            textContainer.scrollIndicatorInsets = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
-        }else{
+        if notifaction.name == Notification.Name.UIKeyboardWillChangeFrame{
             textContainer.contentInset = UIEdgeInsets(top: 13, left: 0, bottom: keyboardEndFrame.height, right: 0)
             textContainer.scrollIndicatorInsets = textContainer.contentInset
+        }else{
+            textContainer.contentInset = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
+            textContainer.scrollIndicatorInsets = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
         }
         
         textContainer.scrollRangeToVisible(textContainer.selectedRange)
