@@ -74,6 +74,7 @@
 			isa = PBXGroup;
 			children = (
 				B2B037A41E21346500B848FF /* Constants.swift */,
+				B2FE34591E3CB5DD0040A52C /* PropertyKeyConstants.swift */,
 				B2B037881E20D5EE00B848FF /* AppDelegate.swift */,
 				B2B037A21E212C9800B848FF /* BaseViewController.swift */,
 				B2B0379A1E20D63E00B848FF /* BaseSplitViewController.swift */,
@@ -85,7 +86,6 @@
 				B2B037941E20D5EE00B848FF /* Info.plist */,
 				B2FE34551E3CA4300040A52C /* Notes.swift */,
 				B2FE34571E3CA4A70040A52C /* NotesIndex.swift */,
-				B2FE34591E3CB5DD0040A52C /* PropertyKeyConstants.swift */,
 				B2EBB8751E4F52D100F2BB7E /* ServiceManager.swift */,
 			);
 			path = NCNotepad;

@@ -19,6 +19,10 @@ class NotesIndex: NSObject {
         return Static.instance
     }
     
+    func initializeNotesDataSource(notesData:[Notes]) {
+        notesDataSource.setArray(notesData)
+    }
+    
     func addNoteToDataSource(note:Notes){
         notesDataSource.add(note)
     }
@@ -29,26 +33,5 @@ class NotesIndex: NSObject {
     
     func replaceNoteWithOtherNote(replacedNote: Notes, newNote:Notes){
         notesDataSource.replaceObject(at: notesDataSource.index(of: replacedNote), with: newNote)
-    }
-    
-    //MARK: NSUSERDEAULT GETTER SETTER
-    
-    func getNotesDataSourceFromUserDefaults(){
-        var decoded:Data?
-        decoded = UserDefaults.standard.object(forKey: "NCNOTEPAD") as! Data?
-        if decoded != nil {
-            let notes = NSKeyedUnarchiver.unarchiveObject(with: decoded!) as! [Notes]
-            notesDataSource.addObjects(from: notes)
-        }
-    }
-    
-    func saveNotesDataSourceToUserDefaults(){
-        if notesDataSource.count > 0 {
-            let encodedData:Data = NSKeyedArchiver.archivedData(withRootObject: notesDataSource)
-            UserDefaults.standard.set(encodedData, forKey: "NCNOTEPAD")
-        }else{
-            UserDefaults.standard.removeObject(forKey: "NCNOTEPAD")
-        }
-        UserDefaults.standard.synchronize()
     }
 }

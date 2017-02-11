@@ -31,12 +31,12 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         super.viewDidLoad()
         notesList.dataSource = self
         notesList.delegate = self
-        notesList.backgroundColor = Colors.APP_BACKGROUND_COLOR
-        notesList.separatorColor = Colors.NAVIGATION_BAR_COLOR
+        notesList.backgroundColor = Constants_Color.APP_BACKGROUND_COLOR
+        notesList.separatorColor = Constants_Color.NAVIGATION_BAR_COLOR
         
-        separatorView.backgroundColor = UIDevice.current.userInterfaceIdiom == .phone ? UIColor.clear :  Colors.NAVIGATION_BAR_COLOR
+        separatorView.backgroundColor = UIDevice.current.userInterfaceIdiom == .phone ? UIColor.clear :  Constants_Color.NAVIGATION_BAR_COLOR
         currentSplitViewController?.delegate = self
-        self.title = Constants.APPLICATION_TITLE
+        self.title = Constants_Application.TITLE
         
     }
     
@@ -47,7 +47,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         }else{
             if noteIndexInstance.notesDataSource.count > 0 {
                 let lastNote:Notes = noteIndexInstance.notesDataSource.lastObject as! Notes
-                if lastNote.title == "Untitled Note" && lastNote.details == ""{
+                if lastNote.title == Constants_Editor.DEFAULT_NOTE_NAME && lastNote.details == Constants_String.nEmptyString{
                     noteIndexInstance.notesDataSource.remove(lastNote)
                 }
             }
@@ -66,10 +66,10 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell = tableView.dequeueReusableCell(withIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER)
+        var cell = tableView.dequeueReusableCell(withIdentifier: Constants_Cell_Identifier.NOTES_LIST_IDENTIFIER)
         
         if cell == nil {
-            cell = UITableViewCell(style: .subtitle, reuseIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER )
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: Constants_Cell_Identifier.NOTES_LIST_IDENTIFIER )
         }
         
         let totalCount = noteIndexInstance.notesDataSource.count - 1
@@ -77,17 +77,17 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         let notes:Notes = (noteIndexInstance.notesDataSource[totalCount - indexPath.row] as! Notes)
         cell?.textLabel?.text = notes.title
         cell?.textLabel?.textColor = UIColor.black
-        cell?.detailTextLabel?.text = ServiceManager().convertDateFormater(date: notes.date!) + "  " + notes.details!
+        cell?.detailTextLabel?.text = ServiceManager.convertDateFormater(date: notes.date!) + "  " + notes.details!
         cell?.detailTextLabel?.textColor = UIColor.black
          
-        cell?.backgroundColor = Colors.APP_BACKGROUND_COLOR
+        cell?.backgroundColor = Constants_Color.APP_BACKGROUND_COLOR
         cell?.selectionStyle = .none
         let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
         imageView.image = #imageLiteral(resourceName: "favorite")
         cell?.accessoryView = notes.favoriteTag! ? imageView : UIView()
         
         if UIDevice.current.userInterfaceIdiom == .pad && indexPath == selectedIndex{
-            cell?.backgroundColor = Colors.NAVIGATION_BAR_COLOR
+            cell?.backgroundColor = Constants_Color.NAVIGATION_BAR_COLOR
             cell?.textLabel?.textColor = UIColor.white
             cell?.detailTextLabel?.textColor = UIColor.white
             imageView.image = #imageLiteral(resourceName: "favorite_ipad_yellow")
@@ -165,7 +165,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     }
     
     func addNewNoteToDataSource() -> Notes{
-        let demoNote = Notes(id: 0, title: "Untitled Note", details: "", sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: true)
+        let demoNote = Notes(id: 0, title: Constants_Editor.DEFAULT_NOTE_NAME, details: Constants_String.nEmptyString, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: true)
         NotesIndex.sharedInstance.addNoteToDataSource(note: demoNote)
         return demoNote
     }
