@@ -37,6 +37,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         separatorView.backgroundColor = UIDevice.current.userInterfaceIdiom == .phone ? UIColor.clear :  Colors.NAVIGATION_BAR_COLOR
         currentSplitViewController?.delegate = self
         self.title = Constants.APPLICATION_TITLE
+        
     }
     
     override func viewWillAppear(_ animated: Bool) {

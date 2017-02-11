@@ -116,6 +116,16 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
                 self.masterTableViewController?.notesList.reloadData()
         }))
         settingsAlertView.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        
+        if UIDevice.current.userInterfaceIdiom == .pad {
+            settingsAlertView.modalPresentationStyle = .popover
+            if let popoverController = settingsAlertView.popoverPresentationController {
+                popoverController.barButtonItem = rightBarButtonItem
+            }
+        }
+        
+        
         self.present(settingsAlertView, animated: true, completion: nil)
     }
     
@@ -137,7 +147,6 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
         confirmAlertBox.addTextField(configurationHandler: { (textField) -> Void in
         textField.placeholder = self.title
         })
-    
         self.present(confirmAlertBox, animated: true, completion: nil)
     }
     
