@@ -19,7 +19,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     
     var masterTableViewController:MasterTableViewController?
     
-    var currentNote:Notes!{
+    var currentNote:Note!{
         didSet(newNoteName){
             if textContainer != nil {
                 refreshUI()
@@ -142,7 +142,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
         confirmAlertBox.addAction(UIAlertAction(title: Constants_String.nCancel, style: .destructive, handler: nil))
         confirmAlertBox.addAction(UIAlertAction(title: Constants_String.nSave, style: .default, handler: { action -> Void in
         let textField = confirmAlertBox.textFields?.first
-            let note = Notes.init(id: 0, title: ((textField?.text)! == Constants_String.nEmptyString ? self.title : textField?.text)!, details: self.textContainer.attributedText.string, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: false)
+            let note = Note.init(id: 0, title: ((textField?.text)! == Constants_String.nEmptyString ? self.title : textField?.text)!, details: self.textContainer.attributedText.string, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: false)
         let notesIndexInstance = NotesIndex.sharedInstance
         notesIndexInstance.replaceNoteWithOtherNote(replacedNote: self.currentNote, newNote: note)
         self.currentNote = note
@@ -159,7 +159,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     func goBackToMasterViewController(){
         if UIDevice.current.userInterfaceIdiom == .phone {
             self.textContainer.resignFirstResponder()
-            self.navigationController?.popViewController(animated: true)
+            let _ = self.navigationController?.popViewController(animated: true)
         }else{
             self.title = currentNote.title
             masterTableViewController?.tableViewDidSelect(indexPath: IndexPath(row: NotesIndex.sharedInstance.notesDataSource.count - 1 - NotesIndex.sharedInstance.notesDataSource.index(of: currentNote), section: 0))
@@ -186,7 +186,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
 }
 
 extension DetailedViewController: NoteSelectionDelegate {
-    func noteSelected(seletecedNote: Notes) {
+    func noteSelected(seletecedNote: Note) {
         currentNote = seletecedNote
     }
 }

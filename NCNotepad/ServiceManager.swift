@@ -33,7 +33,7 @@ class ServiceManager: NSObject {
         var decoded:Data?
         decoded = UserDefaults.standard.object(forKey: Constants_Application.USERDEFAULT_KEY) as! Data?
         if decoded != nil {
-            NotesIndex.sharedInstance.initializeNotesDataSource(notesData: NSKeyedUnarchiver.unarchiveObject(with: decoded!) as! [Notes])
+            NotesIndex.sharedInstance.initializeNotesDataSource(notesData: NSKeyedUnarchiver.unarchiveObject(with: decoded!) as! [Note])
         }
     }
     

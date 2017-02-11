@@ -19,11 +19,11 @@ class NotesIndex: NSObject {
         return Static.instance
     }
     
-    func initializeNotesDataSource(notesData:[Notes]) {
+    func initializeNotesDataSource(notesData:[Note]) {
         notesDataSource.setArray(notesData)
     }
     
-    func addNoteToDataSource(note:Notes){
+    func addNoteToDataSource(note:Note){
         notesDataSource.add(note)
     }
     
@@ -31,7 +31,7 @@ class NotesIndex: NSObject {
         notesDataSource.removeObject(at: index)
     }
     
-    func replaceNoteWithOtherNote(replacedNote: Notes, newNote:Notes){
+    func replaceNoteWithOtherNote(replacedNote: Note, newNote:Note){
         notesDataSource.replaceObject(at: notesDataSource.index(of: replacedNote), with: newNote)
     }
 }

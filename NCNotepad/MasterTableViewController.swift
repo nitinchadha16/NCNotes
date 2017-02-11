@@ -9,7 +9,7 @@
 import UIKit
 
 protocol NoteSelectionDelegate: class {
-    func noteSelected(seletecedNote: Notes)
+    func noteSelected(seletecedNote: Note)
 }
 
 class MasterTableViewController: BaseViewController,UISplitViewControllerDelegate,UITableViewDelegate,UITableViewDataSource {
@@ -46,7 +46,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
             pushToDetailedViewController(creatingNewNote: true)
         }else{
             if noteIndexInstance.notesDataSource.count > 0 {
-                let lastNote:Notes = noteIndexInstance.notesDataSource.lastObject as! Notes
+                let lastNote:Note = noteIndexInstance.notesDataSource.lastObject as! Note
                 if lastNote.title == Constants_Editor.DEFAULT_NOTE_NAME && lastNote.details == Constants_String.nEmptyString{
                     noteIndexInstance.notesDataSource.remove(lastNote)
                 }
@@ -74,7 +74,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         
         let totalCount = noteIndexInstance.notesDataSource.count - 1
     
-        let notes:Notes = (noteIndexInstance.notesDataSource[totalCount - indexPath.row] as! Notes)
+        let notes:Note = (noteIndexInstance.notesDataSource[totalCount - indexPath.row] as! Note)
         cell?.textLabel?.text = notes.title
         cell?.textLabel?.textColor = UIColor.black
         cell?.detailTextLabel?.text = ServiceManager.convertDateFormater(date: notes.date!) + "  " + notes.details!
@@ -109,7 +109,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete{
-            let noteToRemove:Notes = noteIndexInstance.notesDataSource[noteIndexInstance.notesDataSource.count - 1 - indexPath.row] as! Notes
+            let noteToRemove:Note = noteIndexInstance.notesDataSource[noteIndexInstance.notesDataSource.count - 1 - indexPath.row] as! Note
             noteIndexInstance.notesDataSource.remove(noteToRemove)
             notesList.beginUpdates()
             notesList.deleteRows(at: [indexPath], with: .automatic)
@@ -137,7 +137,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
             }
         }
         let count = noteIndexInstance.notesDataSource.count
-        self.delegate?.noteSelected(seletecedNote: noteIndexInstance.notesDataSource[count - indexPath.row - 1] as! Notes)
+        self.delegate?.noteSelected(seletecedNote: noteIndexInstance.notesDataSource[count - indexPath.row - 1] as! Note)
     }
     
 
@@ -164,8 +164,8 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         }
     }
     
-    func addNewNoteToDataSource() -> Notes{
-        let demoNote = Notes(id: 0, title: Constants_Editor.DEFAULT_NOTE_NAME, details: Constants_String.nEmptyString, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: true)
+    func addNewNoteToDataSource() -> Note{
+        let demoNote = Note(id: 0, title: Constants_Editor.DEFAULT_NOTE_NAME, details: Constants_String.nEmptyString, sortOrder: 0, date: NSDate() as Date, time: NSDate() as Date, favoriteTag: false, newNoteFlag: true)
         NotesIndex.sharedInstance.addNoteToDataSource(note: demoNote)
         return demoNote
     }
