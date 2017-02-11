@@ -29,7 +29,6 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        notesList.register(UITableViewCell.self, forCellReuseIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER)
         notesList.dataSource = self
         notesList.delegate = self
         notesList.backgroundColor = Colors.APP_BACKGROUND_COLOR
@@ -66,9 +65,10 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        var cell:UITableViewCell? = tableView.dequeueReusableCell(withIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER, for: indexPath)
+        var cell = tableView.dequeueReusableCell(withIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER)
+        
         if cell == nil {
-            cell = UITableViewCell(style: .default, reuseIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER )
+            cell = UITableViewCell(style: .subtitle, reuseIdentifier: Cell_Identifier.NOTES_LIST_IDENTIFIER )
         }
         
         let totalCount = noteIndexInstance.notesDataSource.count - 1
@@ -76,6 +76,9 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         let notes:Notes = (noteIndexInstance.notesDataSource[totalCount - indexPath.row] as! Notes)
         cell?.textLabel?.text = notes.title
         cell?.textLabel?.textColor = UIColor.black
+        cell?.detailTextLabel?.text = "Feb 11,2017  " + notes.details!
+        cell?.detailTextLabel?.textColor = UIColor.black
+         
         cell?.backgroundColor = Colors.APP_BACKGROUND_COLOR
         cell?.selectionStyle = .none
         let imageView:UIImageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
@@ -85,6 +88,7 @@ class MasterTableViewController: BaseViewController,UISplitViewControllerDelegat
         if UIDevice.current.userInterfaceIdiom == .pad && indexPath == selectedIndex{
             cell?.backgroundColor = Colors.NAVIGATION_BAR_COLOR
             cell?.textLabel?.textColor = UIColor.white
+            cell?.detailTextLabel?.textColor = UIColor.white
         }
         return cell!
     }

@@ -8,6 +8,38 @@
 	<array>
 		<dict>
 			<key>Type</key>
+			<string>PSGroupSpecifier</string>
+			<key>Title</key>
+			<string>Sorting</string>
+		</dict>
+		<dict>
+			<key>Type</key>
+			<string>PSToggleSwitchSpecifier</string>
+			<key>Title</key>
+			<string>SortAlphabetically</string>
+			<key>Key</key>
+			<string>sortAlphabetically</string>
+			<key>DefaultValue</key>
+			<false/>
+		</dict>
+        <dict>
+            <key>Type</key>
+            <string>PSToggleSwitchSpecifier</string>
+            <key>Title</key>
+            <string>Favorites come first</string>
+            <key>Key</key>
+            <string>sortAlphabetically</string>
+            <key>DefaultValue</key>
+            <false/>
+        </dict>
+        <dict>
+            <key>Type</key>
+            <string>PSGroupSpecifier</string>
+            <key>Title</key>
+            <string>About us</string>
+        </dict>
+		<dict>
+			<key>Type</key>
 			<string>PSTitleValueSpecifier</string>
 			<key>DefaultValue</key>
 			<string>1.0.1</string>
@@ -16,17 +48,16 @@
 			<key>Key</key>
 			<string>appVersion</string>
 		</dict>
-        <dict>
-            <key>Type</key>
-            <string>PSTitleValueSpecifier</string>
-            <key>DefaultValue</key>
-            <string>Nitin Chadha</string>
-            <key>Title</key>
-            <string>Author</string>
-            <key>Key</key>
-            <string>authorName</string>
-        </dict>
-
+		<dict>
+			<key>Type</key>
+			<string>PSTitleValueSpecifier</string>
+			<key>DefaultValue</key>
+			<string>Nitin Chadha</string>
+			<key>Title</key>
+			<string>Author</string>
+			<key>Key</key>
+			<string>authorName</string>
+		</dict>
 	</array>
 </dict>
 </plist>

@@ -109,7 +109,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
     //MARK: Options List Method
     
     func showOptionList(){
-        let settingsAlertView = UIAlertController(title: "", message: "Settings", preferredStyle: .actionSheet)
+        let settingsAlertView = UIAlertController(title: nil, message: nil, preferredStyle: .actionSheet)
         let favoriteText = currentNote.favoriteTag! ? "Remove from favorites" : "Add to favorites"
         settingsAlertView.addAction(UIAlertAction(title: favoriteText, style: .default, handler: {(alert: UIAlertAction!) in
                 self.currentNote.favoriteTag = !self.currentNote.favoriteTag!
@@ -158,7 +158,7 @@ class DetailedViewController: BaseViewController,UITextViewDelegate {
         let keyboardEndFrame = self.view.convert(keyboardEndFrameScreenCordinates, to: self.view.window)
         
         if notifaction.name == Notification.Name.UIKeyboardWillHide{
-            textContainer.contentInset = UIEdgeInsets.zero
+            textContainer.contentInset = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
             textContainer.scrollIndicatorInsets = UIEdgeInsets(top: 13, left: 0, bottom: 0, right: 0)
         }else{
             textContainer.contentInset = UIEdgeInsets(top: 13, left: 0, bottom: keyboardEndFrame.height, right: 0)
