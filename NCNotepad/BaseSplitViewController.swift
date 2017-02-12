@@ -19,7 +19,7 @@ class BaseSplitViewController: UISplitViewController {
         detailViewController.masterTableViewController = masterViewController
         
         if UIDevice.current.userInterfaceIdiom == .pad && NotesIndex.sharedInstance.notesDataSource.count > 0 {
-            let firstFruit = NotesIndex.sharedInstance.notesDataSource.lastObject as! Notes
+            let firstFruit = NotesIndex.sharedInstance.notesDataSource.lastObject as! Note
             detailViewController.currentNote = firstFruit
         }
         

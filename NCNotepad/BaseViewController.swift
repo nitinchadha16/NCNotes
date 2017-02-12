@@ -17,11 +17,11 @@ class BaseViewController: UIViewController {
     }
     
     func initializeUserInterface(){
-        self.view.backgroundColor = Colors.APP_BACKGROUND_COLOR
+        self.view.backgroundColor = Constants_Color.APP_BACKGROUND_COLOR
     }
     
     func setUpNavigationBarUserInterface(){
-        self.navigationController?.navigationBar.barTintColor = Colors.NAVIGATION_BAR_COLOR
+        self.navigationController?.navigationBar.barTintColor = Constants_Color.NAVIGATION_BAR_COLOR
         self.navigationController?.navigationBar.titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white]
         self.navigationController?.navigationBar.isTranslucent = false
         self.navigationController?.navigationItem.leftBarButtonItem?.tintColor = UIColor.white

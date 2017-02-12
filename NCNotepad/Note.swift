@@ -8,7 +8,7 @@
 
 import UIKit
 
-class Notes: NSObject,NSCoding {
+class Note: NSObject,NSCoding {
     var id:             NSInteger?
     var title:          String?
     var details:        String?
@@ -44,7 +44,6 @@ class Notes: NSObject,NSCoding {
     }
     
     func encode(with aCoder: NSCoder) {
-        
         aCoder.encode(id!, forKey: PROPERTY_KEY.id)
         aCoder.encode(title!, forKey: PROPERTY_KEY.title)
         aCoder.encode(details!, forKey: PROPERTY_KEY.details)
